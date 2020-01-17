@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.box {
+  border-style: solid;
+  width: 3rem;
+  height: 3rem;
+}
+
+.inner-box {
+  width: inherit;
+  height: inherit;
+}
+
+.hidden {
+  background-color: grey
+}

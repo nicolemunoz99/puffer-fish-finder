@@ -1,6 +1,7 @@
 
 
 // make a board populated with mines and numbers
+
 var makeBoard = (n) => {
   // n = 10;
   let board = [];
@@ -13,17 +14,16 @@ var makeBoard = (n) => {
   }
 
   let mineCoords = getMines(n);
-  let i = 0
+
   mineCoords.forEach(coord => {
     board[coord[0]][coord[1]] = 'x';
 
   })
 
-  console.log('board with mines: ', board)
 
-  populatedBoard = fillBoard(board);
+  let populatedBoard = fillBoard(board);
 
-  return board;
+  return populatedBoard;
 }
 
 // ---------------------------
@@ -39,7 +39,7 @@ var getMines = (num) => {
     return Math.floor(Math.random() * (scale));
   }
 
-  for (let = i = 0; i < num; i++) {
+  for (let i = 0; i < num; i++) {
     while (true) {
       let row = getRandom(num);
       let col = getRandom(num);
@@ -85,8 +85,6 @@ var countMines = (coord, boardWithMines) => {
   let count = 0;
   let x = coord[0];
   let y = coord[1];
-  console.log('NEW COORD TO CHECK')
-  console.log(x, y)
 
   let xToCheck = [x-1, x, x+1];
   let yToCheck = [y-1, y, y+1];
@@ -104,12 +102,12 @@ var countMines = (coord, boardWithMines) => {
   return count;
 }
 
-x = makeBoard(8)
+// x = makeBoard(8)
 
-x.forEach(row => {
-  let print = row.join(', ')
-  console.log(print + '\n')
-})
+// x.forEach(row => {
+//   let print = row.join(', ')
+//   console.log(print + '\n')
+// })
 
 export default makeBoard;
 
