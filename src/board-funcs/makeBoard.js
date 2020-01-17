@@ -39,7 +39,9 @@ var getMines = (num) => {
     return Math.floor(Math.random() * (scale));
   }
 
-  for (let i = 0; i < num; i++) {
+  let numMines = Math.floor(num * num/10 )
+
+  for (let i = 0; i < numMines; i++) {
     while (true) {
       let row = getRandom(num);
       let col = getRandom(num);

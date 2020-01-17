@@ -1,7 +1,6 @@
 
 
 const revealEmptySquares = (coordinates, board) => {
-  // console.log('board', board)
   let empties = [];
   let visited = [];
 
@@ -15,26 +14,14 @@ const revealEmptySquares = (coordinates, board) => {
 
     for (let i = 0; i < xToCheck.length; i++) {
       let currRow = board[xToCheck[i]];
-      // console.log('currRow index', xToCheck[i])
-      // console.log('currRow index', xToCheck[i])
       for (let j = 0; j < yToCheck.length; j++) {
         let currVal = currRow === undefined ? undefined : currRow[yToCheck[j]];
         let hasBeenVisited = isVisited([xToCheck[i], yToCheck[j]], visited);
-        // if
-        // the current row is defined
-        // AND the current value is null
-        // AND the current coord hasn't been visited
-        
-        // console.log('visited:', visited)
-        // console.log('currVal', currVal)
         if (currRow && currVal === null && !hasBeenVisited) {
-          // console.log(currVal, hasBeenVisited, 'coords: ', [xToCheck[i], yToCheck[j]], currRow[yToCheck[j]])
           empties.push([xToCheck[i], yToCheck[j]]);
           getEmpties([xToCheck[i], yToCheck[j]]);
-          // add current sqare to visited array
           visited.push([xToCheck[i], yToCheck[j]]);
         } else {
-          // add current sqare to visited array
           visited.push([xToCheck[i], yToCheck[j]]);
         }
 

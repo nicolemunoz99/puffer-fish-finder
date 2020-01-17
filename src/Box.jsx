@@ -1,45 +1,41 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import revealEmptySquares from './board-funcs/revealEmptySquares.js';
 
 const Box = (props) => {
-  
-
-  let value = props.board[props.x][props.y];
   let showValue = false
+  let value = props.board[props.x][props.y];
 
-  props.revealedBoxes.forEach(coord => {
-    if (coord[0] === props.x && coord[1] === props.y) {
-      showValue = true;
-    }
-  })   
+  if (props.dead) {
+    showValue = true;
+  } else {
 
-
-  if ( typeof value === 'number' ) {
-
-  }
-
-  if (value === 'x') {
-    // value = ':('
+    props.revealedBoxes.forEach(coord => {
+      if (coord[0] === props.x && coord[1] === props.y) {
+        showValue = true;
+      }
+    });
   }
 
   const handleClick = (e) => {
-    console.log('value', value)
     let newState = props.revealedBoxes.slice();
     newState.push([props.x, props.y])
-    
-    if (value === null) {
-      // get surrounding coords that are also null
-      // push to newState
-      let newEmpties = revealEmptySquares([props.x, props.y], props.board)
-      newState.push(...newEmpties);
-      // console.log(newState);
+
+    if (value === 'x') {
+      props.updateDead(true);
     }
 
+    if (value === null) {
+      // get surrounding null squares
+      let newEmpties = revealEmptySquares([props.x, props.y], props.board)
+      newState.push(...newEmpties);
+    }
     props.updateRevealedBoxes(newState);
   }
-  
+
   return (
-    <div className={`inner-box ${showValue ? null : 'hidden'}`} onClick={handleClick}>{showValue ? value : value}</div>
+    <div className={`inner-box ${value === null ? 'empty' : null} ${showValue ? 'revealed' : 'hidden'} 
+                    ${value === 'x' && props.dead ? 'dead' : null} `}
+      onClick={handleClick}>{showValue ? value : null}</div>
   )
 };
 
