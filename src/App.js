@@ -3,10 +3,6 @@ import './App.css';
 import makeBoard from './board-funcs/makeBoard.js';
 import Box from './Box.jsx';
 
-const boardSizes = [];
-for (let i = 8; i <= 25; i++) {
-  boardSizes.push(i)
-}
 
 const App = (props) => {
   const [board, updateBoard] = useState(null);
