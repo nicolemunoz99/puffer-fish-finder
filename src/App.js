@@ -9,7 +9,7 @@ const App = (props) => {
   const [revealedBoxes, updateRevealedBoxes] = useState([]);
   const [dead, updateDead] = useState(false);
   const [mines, updateMines] = useState(null);
-  
+
   useEffect(() => {
     updateBoard(makeBoard(10));
   }, []);
@@ -20,7 +20,7 @@ const App = (props) => {
       board.forEach((row, x) => {
         row.forEach((square, y) => {
           if (square === 'x') {
-            tempMines.push([x,y])
+            tempMines.push([x, y]);
           }
         });
       });
@@ -31,45 +31,46 @@ const App = (props) => {
   const newGame = (e) => {
     updateDead(false);
     updateBoard(makeBoard(e.target.id));
-    updateRevealedBoxes([])
+    updateRevealedBoxes([]);
   }
 
   return (
     <div className="App">
       <div className="title-container">
         <div className="title mt-3 mb-3">
-          Mine Mopper
+          Puffer Fish Finder
         </div>
       </div>
       <div className="container">
-      <div className='board'>
-        {board ?
-          board.map((row, x) => {
-            return (
-              <div className='row justify-content-md-center no-gutters'>
-                
-                {
-                row.map((square, y) => {
-                  return (
-                    <div className={`col box`}>
-                        <Box updateRevealedBoxes={updateRevealedBoxes} 
-                            x={x} 
-                            y={y} 
-                            value={board[x][y]} 
-                            board={board} 
-                            revealedBoxes={revealedBoxes}
-                            dead={dead}
-                            updateDead={updateDead}
-                      />
-                    </div>
-                  )
-                })}
-                
-              </div>
-            )
-          })
-          : null
-        }
+        <div className="row">
+          <div className='col-md-2'></div>
+          <div className='col-md board'>
+            {board ?
+              board.map((row, x) => {
+                return (
+                  <div className='row justify-content-md-center no-gutters'>
+                    {
+                      row.map((square, y) => {
+                        return (
+                          <div className={`col box`}>
+                            <Box updateRevealedBoxes={updateRevealedBoxes}
+                              x={x}
+                              y={y}
+                              board={board}
+                              revealedBoxes={revealedBoxes}
+                              dead={dead}
+                              updateDead={updateDead}
+                            />
+                          </div>
+                        )
+                      })}
+                  </div>
+                )
+              })
+              : null
+            }
+          </div>
+          <div className='col-md-2'></div>
         </div>
       </div> <span className='mr-2'>New Game: </span>
       <button onClick={newGame} id="10" className='mt-4 mb-4 mr-2 new-game'>Easy</button>
