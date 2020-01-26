@@ -29,25 +29,34 @@ const Box = (props) => {
   }
 
   const handleClick = (e) => {
-    if (props.isMarker ) {
+    if (props.isMarker) {
       props.updateIsMarker(false);
-      let newMarkedState = [...props.markedBoxes, [props.x, props.y]]
+      if (!isMarked) {
+        let newMarkedState = [...props.markedBoxes, [props.x, props.y]]
+        props.updateMarkedBoxes(newMarkedState)
+      }
+      return
+    }
+    if (isMarked) {
+      let newMarkedState = props.markedBoxes.filter(coord => {
+        return coord[0] !== props.x && coord[1] !== props.y
+      })
       props.updateMarkedBoxes(newMarkedState)
       return
     }
-// TO DO : if clicked and isMarker, then remove marker
-
-    let newRevealedState = [...props.revealedBoxes, [props.x, props.y]];
-
+    // game lost
     if (value === 'x') {
       props.updateDead(true);
     }
+
+    // add clicked on box to list of revealed boxes
+    let newRevealedState = [...props.revealedBoxes, [props.x, props.y]];
+    
+    // reveal surrounding null squares when clicking on null box
     if (value === null) {
-      // reveal surrounding null squares
       let newEmpties = revealEmptySquares([props.x, props.y], props.board);
       newRevealedState.push(...newEmpties);
     }
-
     props.updateRevealedBoxes(newRevealedState);
   };
 

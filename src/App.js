@@ -8,16 +8,18 @@ const App = (props) => {
   const [board, updateBoard] = useState(null);
   const [revealedBoxes, updateRevealedBoxes] = useState([]);
   const [markedBoxes, updateMarkedBoxes] = useState([])
-  const [dead, updateDead] = useState(false);
   const [mines, updateMines] = useState(null);
   const [isMarker, updateIsMarker] = useState(false);
   const [markerPosition, updateMarkerPosition] = useState({ top: null, left: null })
+  const [dead, updateDead] = useState(false);
+  const [won, updateWon] = useState(false);
 
 
   useEffect(() => {
     updateBoard(makeBoard(10));
   }, []);
 
+  // add mine coordinates to state when loading a new board
   useEffect(() => {
     if (board) {
       let tempMines = [];
@@ -32,11 +34,32 @@ const App = (props) => {
     }
   }, [board]);
 
+  // check if game is won when a new box is marked
+  useEffect(() => {
+    if (mines && revealedBoxes) {
+      let allMinesMarked = mines.every(mineCoord => {
+        let thisMineMarked = false;
+        markedBoxes.forEach(markCoord => {
+          if (markCoord[0] === mineCoord[0] && markCoord[1] === mineCoord[1]) {
+            thisMineMarked = true;
+          }
+        });
+        return thisMineMarked
+      })
+      if (allMinesMarked) {
+        updateWon(true)
+      }
+    }
+  }, [markedBoxes])
+
 
   const newGame = (e) => {
+    if (won) updateWon(false)
     updateDead(false);
-    updateBoard(makeBoard(e.target.id));
+    let newGameType = e.target.id ? e.target.id : '10'; 
+    updateBoard(makeBoard(newGameType));
     updateRevealedBoxes([]);
+    updateMarkedBoxes([]);
   }
 
   const handleMarkerClick = (e) => {
@@ -55,6 +78,10 @@ const App = (props) => {
     }
   }
 
+  const resetGame = (e) => {
+
+  }
+
   return (
     <div onMouseMove={handleMouseMove} onClick={dropMarker} className="App">
       {isMarker ?
@@ -66,13 +93,17 @@ const App = (props) => {
           Puffer Fish Finder
         </div>
       </div>
-      {/* palm tree marker */}
+      {/* header */}
       <div className="container">
-        <div className="row justify-content-md-center">
-          <div className='col-12'>
+        <div className="row header-items justify-content-md-center no-gutters">
+          {/* marker icon */}
+          <div className="col-auto">
             <div className='marker-container' onClick={handleMarkerClick}>
-
             </div>
+          </div>
+          {/* puffer count */}
+          <div className="col-auto mine-count ml-4">
+            <span className="vertical-center">{mines && markedBoxes ? mines.length - markedBoxes.length : null}</span>
           </div>
         </div>
         {/* board */}
@@ -87,7 +118,7 @@ const App = (props) => {
                       row.map((square, y) => {
                         return (
                           <div className={`col box`}>
-                            <Box 
+                            <Box
                               x={x}
                               y={y}
                               board={board}
@@ -111,10 +142,21 @@ const App = (props) => {
           </div>
           <div className='col-md-2'></div>
         </div>
-      </div> <span className='mr-2'>New Game: </span>
+      </div>
+      <span className='mr-2'>New Game: </span>
       <button onClick={newGame} id="10" className='mt-4 mb-4 mr-2 new-game'>Easy</button>
       <button onClick={newGame} id="15" className='mt-4 mb-4 mr-2 new-game'>Medium</button>
       <button onClick={newGame} id="25" className='mt-4 mb-4 mr-2 new-game'>Expert</button>
+
+      {/* show winner    */}
+      {won ? 
+      <div onClick={newGame} className="pufferModal">
+        <div className="win vertical-horizontal-center">
+          Winner! You Found All the Puffers<img src="/images/happyPuffer.png"></img>
+        </div>
+      </div>
+      : null
+      }
 
     </div>
   );
