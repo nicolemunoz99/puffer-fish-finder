@@ -22,6 +22,7 @@ const revealEmptySquares = (coordinates, board) => {
           getEmpties([xToCheck[i], yToCheck[j]]);
           visited.push([xToCheck[i], yToCheck[j]]);
         } else {
+          empties.push([xToCheck[i], yToCheck[j]]);
           visited.push([xToCheck[i], yToCheck[j]]);
         }
 
@@ -44,7 +45,7 @@ const isVisited = (coord, visitedArray) => {
     }
   });
   return result;
-}
+};
 
 
 export default revealEmptySquares;
