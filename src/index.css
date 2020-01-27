@@ -64,15 +64,15 @@ code {
   padding: 1rem;
 }
 
+.title {
+  text-align:left;
+}
+
 .title > img {
   height: 5rem;
 }
 
 .marker-container {
-  
-  /* width: 7.6vw;
-  height: 7.6vw; */
-  /* background-image: url('/images/palmTree.png'); */
   background-size: contain;
   cursor: grab;
   margin-left: auto;
@@ -141,12 +141,15 @@ code {
 }
 
 .instructions {
+  height: 90vh;
+  max-height: initial;
   padding: 3rem;
   background-color: black;
   color: white;
   text-align: left;
   border-radius: 3rem;
-  overflow: auto
+  overflow: auto;
+  width: 85%;
 }
 
 .closeModal {
@@ -162,6 +165,10 @@ code {
   margin-bottom: auto;
 }
 
-.ocean-pic {
+.full-width {
   width: 100%
+}
+
+.new-game > button {
+  width: 100%;
 }

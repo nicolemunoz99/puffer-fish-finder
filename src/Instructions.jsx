@@ -9,6 +9,7 @@ const Instructions = (props) => {
     <div onClick={hideModal} className="pufferModal">
       <div className="instructions vertical-horizontal-center">
         <div className="closeModal">X</div>
+        <div>
         <h2>How to Play</h2>
         <p>
           It's like Mine Sweeper, but with puffer fish. 
@@ -34,7 +35,7 @@ const Instructions = (props) => {
           <h4>How to win:</h4>
           Mark all puffer fish with a palm tree.
           </p>
-        
+          </div>
       </div>
 
     </div>

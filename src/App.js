@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import makeBoard from './board-funcs/makeBoard.js';
-import Instructions from './Instructions.jsx'
+import Instructions from './Instructions.jsx';
+import NewGame from './NewGame.jsx';
 import { Box } from './Box.jsx';
 
 const App = (props) => {
@@ -53,11 +54,7 @@ const App = (props) => {
     }
   }, [markedBoxes])
 
-  const gameOptions = {
-    Easy: 10,
-    Medium: 15,
-    Expert: 25
-  };
+
 
   const newGame = (e) => {
     if (won) updateWon(false)
@@ -94,20 +91,23 @@ const App = (props) => {
         <img alt="palm tree" className='marker' src="/images/palmTree.png" style={{ top: markerPosition.top, left: markerPosition.left }}></img>
         : null
       }
+      {/* header */}
       <div className="container-fluid">
         <div className="row title-container">
-          <div className="col-sm-10 title">
+          <div className="col-6 title">
             Puffer Fish Finder <img alt="happy puffer" src="/images/happyPuffer.png"></img>
           </div>
-          <div className="nav-item col-sm-2">
-            <button onClick={clickInstructions} className="btn btn-primary">Instructions</button>
+          <div className="nav-item col-4">
+            <NewGame newGame={newGame}/>
+          </div>
+          <div className="nav-item col-2">
+            <button onClick={clickInstructions} className="btn btn-primary btn-sm">Instructions</button>
           </div>
         </div>
       </div>
 
-      {/* instructions button */}
 
-      {/* header */}
+      {/* above board: marker icon, timer  */}
       <div className="container">
         <div className="row header-items">
 
@@ -120,9 +120,10 @@ const App = (props) => {
           </div>
           <div className="col col-md-2"></div>
         </div>
+
         {/* board */}
         <div className="row">
-          <div className='col-md-2'></div>
+          <div className='col-lg-4 col-md-2'></div>
           <div id="board" className='col-md'>
             {board ?
               board.map((row, x) => {
@@ -154,16 +155,10 @@ const App = (props) => {
               : null
             }
           </div>
-          <div className='col-md-2'></div>
+          <div className='col-lg-4 col-md-2'></div>
         </div>
       </div>
-      <span className='mr-2'>New Game: </span>
-      {/* buttons for game options */}
-      {
-        Object.keys(gameOptions).map(option => {
-          return <button onClick={newGame} id={gameOptions[option]} className='mt-4 mb-4 mr-2 btn btn-primary'>{option}</button>
-        })
-      }
+
       {/* show winner modal */}
       {won ?
         <div onClick={newGame} className="pufferModal">
@@ -178,7 +173,7 @@ const App = (props) => {
         <Instructions updateShowInstructions={updateShowInstructions} />
         : null
       }
-      <img className="ocean-pic" alt="ocean" src="/images/water.png"></img>
+      <img className="full-width" alt="ocean" src="/images/water.png"></img>
     </div>
   );
 }
