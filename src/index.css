@@ -61,16 +61,27 @@ code {
   background-color: rgb(36, 35, 35);
   color: white;
   font-size: 2rem;
+  padding: 1rem;
+}
+
+.title > img {
+  height: 5rem;
 }
 
 .marker-container {
-  border-style: solid;
-  border-width: 1px;
-  width: 7.6vw;
-  height: 7.6vw;
-  background-image: url('/images/palmTree.png');
+  
+  /* width: 7.6vw;
+  height: 7.6vw; */
+  /* background-image: url('/images/palmTree.png'); */
   background-size: contain;
   cursor: grab;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.marker-container > img {
+  border-style: solid;
+  border-width: 1px;
 }
 
 .marker {
@@ -94,7 +105,7 @@ code {
 }
 
 .vertical-center {
-  position: absolute;
+  position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -127,5 +138,30 @@ code {
   left: 50%;
   font-size: 5rem;
   text-align: center;
+}
 
+.instructions {
+  padding: 3rem;
+  background-color: black;
+  color: white;
+  text-align: left;
+  border-radius: 3rem;
+  overflow: auto
+}
+
+.closeModal {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.nav-item {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.ocean-pic {
+  width: 100%
 }
