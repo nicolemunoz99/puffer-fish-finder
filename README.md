@@ -23,3 +23,4 @@ Minesweeper logic where puffer fish are the mines.
 
 <img src="https://github.com/nicolemunoz99/puffer-fish-finder/blob/master/mobile.jpg" style="height:30%">
 
+<img src="https://github.com/nicolemunoz99/puffer-fish-finder/blob/master/board.jpg" style="height:30%">
