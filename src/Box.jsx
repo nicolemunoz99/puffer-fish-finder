@@ -55,7 +55,18 @@ const Box = (props) => {
     // reveal surrounding null squares when clicking on null box
     if (value === null) {
       let newEmpties = revealEmptySquares([props.x, props.y], props.board);
-      newRevealedState.push(...newEmpties);
+      // remove empties that correspond to a marked box
+      let newEmpties2 = newEmpties.filter(emptyCoord => {
+      let isMarked = false;
+      props.markedBoxes.map(markedCoord => {
+          if (emptyCoord[0] === markedCoord[0] &&  emptyCoord[1] === markedCoord[1]) {
+            console.log('in here')
+            isMarked = true;
+          }
+        });
+        return !isMarked;
+      });
+      newRevealedState.push(...newEmpties2);
     }
     props.updateRevealedBoxes(newRevealedState);
   };

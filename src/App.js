@@ -73,7 +73,7 @@ const App = (props) => {
   };
 
   const handleMouseMove = (e) => {
-    let position = { left: e.clientX, top: e.clientY }
+    let position = { left: e.pageX, top: e.pageY }
     updateMarkerPosition(position)
   }
 
