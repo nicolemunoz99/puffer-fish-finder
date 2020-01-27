@@ -58,9 +58,8 @@ const Box = (props) => {
       // remove empties that correspond to a marked box
       let newEmpties2 = newEmpties.filter(emptyCoord => {
       let isMarked = false;
-      props.markedBoxes.map(markedCoord => {
+      props.markedBoxes.forEach(markedCoord => {
           if (emptyCoord[0] === markedCoord[0] &&  emptyCoord[1] === markedCoord[1]) {
-            console.log('in here')
             isMarked = true;
           }
         });

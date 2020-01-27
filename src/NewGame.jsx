@@ -1,7 +1,7 @@
 import React from 'react';
+import gameOptions from './board-funcs/gameOptions.js'
 
 const NewGame = (props) => {
-
 
   return (
     <div>
@@ -12,8 +12,8 @@ const NewGame = (props) => {
         {
           Object.keys(gameOptions).map(option => {
             return (
-              <div className="col-sm new-game mx-1">
-                <button onClick={props.newGame} id={gameOptions[option]} className='mr-2 btn btn-primary btn-sm'>{option}</button>
+              <div className="col-sm mx-1" key={option}>
+                <button onClick={props.newGame} id={option} className='full-width mr-2 btn btn-primary btn-sm'>{option}</button>
               </div>
             )
           })
@@ -26,11 +26,7 @@ const NewGame = (props) => {
 }
 
 
-const gameOptions = {
-  Easy: 10,
-  Medium: 15,
-  Expert: 25
-};
+
 
 
 export default NewGame;

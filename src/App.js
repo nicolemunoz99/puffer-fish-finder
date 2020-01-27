@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import makeBoard from './board-funcs/makeBoard.js';
+import gameOptions from './board-funcs/gameOptions.js'
 import Instructions from './Instructions.jsx';
 import NewGame from './NewGame.jsx';
 import { Box } from './Box.jsx';
 
+
 const App = (props) => {
   const [board, updateBoard] = useState(null);
+  const [gameType, updateGameType] = useState('Easy')
   const [revealedBoxes, updateRevealedBoxes] = useState([]);
   const [markedBoxes, updateMarkedBoxes] = useState([])
   const [mines, updateMines] = useState(null);
@@ -18,10 +21,10 @@ const App = (props) => {
 
 
   useEffect(() => {
-    updateBoard(makeBoard(10));
+    updateBoard(makeBoard(gameOptions['Easy']));
   }, []);
 
-  // add mine coordinates to state when loading a new board
+  // get mine coordinates when loading a new board
   useEffect(() => {
     if (board) {
       let tempMines = [];
@@ -55,12 +58,12 @@ const App = (props) => {
   }, [markedBoxes])
 
 
-
   const newGame = (e) => {
     if (won) updateWon(false)
     updateDead(false);
-    let newGameType = e.target.id ? e.target.id : '10';
-    updateBoard(makeBoard(newGameType));
+    let newGameType = e.target.id ? e.target.id : gameType;
+    updateGameType(newGameType)
+    updateBoard(makeBoard(gameOptions[newGameType]));
     updateRevealedBoxes([]);
     updateMarkedBoxes([]);
   }
@@ -87,31 +90,40 @@ const App = (props) => {
 
   return (
     <div onMouseMove={handleMouseMove} onClick={dropMarker} className="App">
+    {/* active palm tree marker; follows cursor */}
       {isMarker ?
-        <img alt="palm tree" className='marker' src="/images/palmTree.png" style={{ top: markerPosition.top, left: markerPosition.left }}></img>
+        <img alt="palm tree" className='marker' src="/images/palmTree.png" 
+            style={{ top: markerPosition.top, left: markerPosition.left }}>
+        </img>
         : null
       }
-      {/* header */}
+    {/* Nav */}
       <div className="container-fluid">
-        <div className="row title-container">
-          <div className="col-6 title">
+        <div className="row title-container ">
+          <div className="nav-item col-md-5 title">
             Puffer Fish Finder <img alt="happy puffer" src="/images/happyPuffer.png"></img>
           </div>
-          <div className="nav-item col-4">
+          <div className="nav-item col-md-5">
+          <div className="vertical-center">
             <NewGame newGame={newGame}/>
+            </div>
           </div>
-          <div className="nav-item col-2">
-            <button onClick={clickInstructions} className="btn btn-primary btn-sm">Instructions</button>
+          <div className="nav-item col-md-2 col-sm-12 ">
+            <div className="vertical-center">
+              <button onClick={clickInstructions} className="full-width btn btn-primary btn-sm">
+                Instructions
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-
-      {/* above board: marker icon, timer  */}
-      <div className="container">
+    <div className="inner-body">
+    {/* above board: marker icon, timer  */}
+      <div className="container my-auto">
         <div className="row header-items">
 
-          {/* marker icon */}
+        {/* marker icon */}
           <div className='col col-md-12'>
             <div className='col-md-12 marker-container' onClick={handleMarkerClick}>
               <img alt="palmtree" src="/images/palmtree.png"></img>
@@ -120,19 +132,20 @@ const App = (props) => {
           </div>
           <div className="col col-md-2"></div>
         </div>
+        {/* TO DO: timer w/ backend for high-score storage/retrieval */}
 
-        {/* board */}
+    {/* board */}
         <div className="row">
-          <div className='col-lg-4 col-md-2'></div>
-          <div id="board" className='col-md'>
+          <div className='col'></div>
+          <div id="board" className={gameType==="Easy" ? "col-md-6" : (gameType==="Medium" ? "col-md-8" : "col-md-12")}>
             {board ?
               board.map((row, x) => {
                 return (
-                  <div className='row justify-content-md-center no-gutters'>
+                  <div key={x} className='row justify-content-md-center no-gutters'>
                     {
                       row.map((square, y) => {
                         return (
-                          <div className={`col box`}>
+                          <div key={y} className="col box">
                             <Box
                               x={x}
                               y={y}
@@ -155,25 +168,30 @@ const App = (props) => {
               : null
             }
           </div>
-          <div className='col-lg-4 col-md-2'></div>
+          <div className='col'></div>
         </div>
       </div>
 
-      {/* show winner modal */}
+    {/* Modal: winner  */}
       {won ?
         <div onClick={newGame} className="pufferModal">
           <div className="win vertical-horizontal-center">
-            Winner! You Found All the Puffers<img src="/images/happyPuffer.png"></img>
+            Winner! You Found All the Puffers<img alt="happy-puffer" src="/images/happyPuffer.png"></img>
           </div>
         </div>
         : null
       }
-      {/* instructions modal */}
+    {/* Modal: instructions */}
       {showInstructions ?
         <Instructions updateShowInstructions={updateShowInstructions} />
         : null
       }
-      <img className="full-width" alt="ocean" src="/images/water.png"></img>
+    </div>
+
+    {/* footer pic */}
+      <div className="footer-pic full-width">
+        <img className="full-width" alt="ocean" src="/images/water.png"></img>
+      </div>
     </div>
   );
 }
