@@ -92,7 +92,7 @@ const App = (props) => {
     <div onMouseMove={handleMouseMove} onClick={dropMarker} className="App">
     {/* active palm tree marker; follows cursor */}
       {isMarker ?
-        <img alt="palm tree" className='marker' src="/images/palmTree.png" 
+        <img alt="palm tree" className='marker' src="/images/palmtree.png" 
             style={{ top: markerPosition.top, left: markerPosition.left }}>
         </img>
         : null

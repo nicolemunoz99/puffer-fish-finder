@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import revealEmptySquares from './board-funcs/revealEmptySquares.js';
 
 
@@ -7,6 +7,10 @@ const Box = (props) => {
   let showValue = false;
   let isMarked = false;
   let value = props.board[props.x][props.y];
+
+  useEffect(() => {
+
+  }, [props.markedBoxes, props.revealedBoxes, props.dead])
 
   if (props.dead) {
     // game lost
@@ -39,7 +43,7 @@ const Box = (props) => {
     }
     if (isMarked) {
       let newMarkedState = props.markedBoxes.filter(coord => {
-        return coord[0] !== props.x && coord[1] !== props.y
+        return coord[0] !== props.x || coord[1] !== props.y
       })
       props.updateMarkedBoxes(newMarkedState)
       return
@@ -49,7 +53,7 @@ const Box = (props) => {
       props.updateDead(true);
     }
 
-    // add clicked on box to list of revealed boxes
+    // add clicked-on box to list of revealed boxes
     let newRevealedState = [...props.revealedBoxes, [props.x, props.y]];
     
     // reveal surrounding null squares when clicking on null box
