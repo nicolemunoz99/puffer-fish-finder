@@ -15,7 +15,7 @@ Minesweeper logic where puffer fish are the mines.
 </br>
 </br>
 
-<img src="https://github.com/nicolemunoz99/puffer-fish-finder/blob/master/desktop2.jpg" style="width:30%">
+<img src="https://github.com/nicolemunoz99/puffer-fish-finder/blob/master/desktop_mockup.png" style="width:30%">
 
 ### Built With
 - Create React App
@@ -38,6 +38,6 @@ Deployable Docker image: [nemunoz/puffer-fish-finder](https://hub.docker.com/rep
 </br>
 </br>
 
-<img src="https://github.com/nicolemunoz99/puffer-fish-finder/blob/master/mobile.jpg" style="height:30%">
+<img src="https://github.com/nicolemunoz99/puffer-fish-finder/blob/master/mobile_mockup.png" style="height:30%">
 
-<img src="https://github.com/nicolemunoz99/puffer-fish-finder/blob/master/board.jpg" style="height:30%">
+<img src="https://github.com/nicolemunoz99/puffer-fish-finder/blob/master/desktop2_mockup.png" style="height:30%">
