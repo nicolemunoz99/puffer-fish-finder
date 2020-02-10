@@ -8,7 +8,7 @@ Minesweeper logic where puffer fish are the mines.
 - Conditional styling classes
 
 ### Demo
-[http://18.217.167.235:5000](http://18.217.167.235:5000)
+[http://3.12.104.145:5000](http://3.12.104.145:5000)
 
 </br>
 </br>
